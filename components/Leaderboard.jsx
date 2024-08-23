@@ -31,7 +31,7 @@ export default function Leaderboard({rows}) {
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "0.5rem"}}>
-                    <Avatar src={row.character} />
+                    <Avatar src={row.avatar} />
                     <div>
                       {row.name}
                     </div>

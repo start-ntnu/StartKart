@@ -19,7 +19,7 @@ export default function Header({image, players}) {
     const userdata = sess?.data?.user;
     
     const playerData = players.find(p => p.email == userdata?.email);
-    const [character, setCharacter] = useState(playerData?.character || null)
+    const [character, setCharacter] = useState(playerData?.avatar || null)
     const [nickname, setNickname] = useState(playerData?.nickname || playerData?.name?.split(" ")?.[0] || "")
     const [pfp, setPfp] = useState(playerData?.pfp || "")
     
@@ -61,7 +61,7 @@ export default function Header({image, players}) {
         await axios.post("/api/profile", {
             nickname: nickname, 
             pfp: userdata.image,
-            character: character
+            avatar: character
         })
         setLoading(false);
         setEditProfileDialogOpen(false);

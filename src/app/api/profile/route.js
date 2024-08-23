@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getSession } from 'next-auth/react';
-import mysql from 'mysql2/promise';
-import { NextRequest  } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
+import { sql } from "@vercel/postgres";
 
 export async function GET(request) {
     // Get session from next-auth
@@ -15,13 +14,10 @@ export async function GET(request) {
     }
 
     const userEmail = session.user.email;
-
-    // Create a connection to the database
-    const connection = await mysql.createConnection(process.env.DATABASE_URL);
-
+    
     try {
         // Get the user details from the database
-        const [rows] = await connection.query('SELECT * FROM Users WHERE email = ?', [userEmail]);
+        const {rows} = await sql`SELECT * FROM users WHERE email = ${userEmail}`
 
         // Check if we got the user details
         if (!rows || rows.length === 0) {
@@ -35,8 +31,6 @@ export async function GET(request) {
     } catch (error) {
         console.error("Database error:", error);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-    } finally {
-        connection.end();
     }
 }
 
@@ -51,10 +45,9 @@ export async function POST(request) {
     const userEmail = session.user.email;
 
     // Create a connection to the database
-    const connection = await mysql.createConnection(process.env.DATABASE_URL);
     try {
         // Get the user details from the database
-        const [rows] = await connection.query('SELECT * FROM Users WHERE email = ?', [userEmail]);
+        const { rows } = await sql`SELECT * FROM Users WHERE email = ${userEmail}`
 
         // Check if we got the user details
         if (!rows || rows.length === 0) {
@@ -63,13 +56,11 @@ export async function POST(request) {
 
         const userDetails = rows[0];
         const data = await request.json();
-        await connection.query("Update Users SET nickname = ?, `character` = ?, pfp = ? WHERE email = ?", [data.nickname, data.character, data.pfp, userEmail])
+        await sql`Update users SET nickname = ${data.nickname}, avatar = ${data.avatar}, pfp = ${data.pfp} WHERE email = ${userEmail}`
         return NextResponse.json({}, { status: 200 });
     } catch (error) {
         console.error("Database error:", error);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
-    } finally {
-        connection.end();
     }
 
 }

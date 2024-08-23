@@ -38,15 +38,15 @@ export default function Home(props) {
           <div style={{paddingBottom: "1rem", zIndex: 3, position: "relative"}}>
             <div style={{display: "flex", justifyContent: "center" }}>
               <div style={{paddingTop: "3rem", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                <CharacterAvatar color="#C0C0C0" size="small" number="2" icon={data[1]?.character} pfp={data[1]?.pfp}/>
+                <CharacterAvatar color="#C0C0C0" size="small" number="2" icon={data[1]?.avatar} pfp={data[1]?.pfp}/>
                 <h3 style={{padding: 0, margin: 0, color: 'black', fontWeight: "bolder", background: "lightgray", borderRadius: "2rem", padding: "0 0.5rem 0 0.5rem"}}>{data[1]?.nickname}</h3>
               </div>
               <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                <CharacterAvatar color="#FFD700" number="1" icon={data[0]?.character} pfp={data[0]?.pfp}/>
+                <CharacterAvatar color="#FFD700" number="1" icon={data[0]?.avatar} pfp={data[0]?.pfp}/>
                 <h3 style={{padding: 0, margin: 0, color: 'black', fontWeight: "bolder", background: "lightgray", borderRadius: "2rem", padding: "0 0.5rem 0 0.5rem"}}>{data[0]?.nickname}</h3>
               </div>
               <div style={{paddingTop: "3rem",  display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-                <CharacterAvatar color="#CD7F32" size="small" number="3" icon={data[2]?.character} pfp={data[2]?.pfp}/>
+                <CharacterAvatar color="#CD7F32" size="small" number="3" icon={data[2]?.avatar} pfp={data[2]?.pfp}/>
                 <h3 style={{padding: 0, margin: 0, color: 'black', fontWeight: "bolder", background: "lightgray", borderRadius: "2rem", padding: "0 0.5rem 0 0.5rem"}}>{data[2]?.nickname}</h3>
               </div>
             </div>

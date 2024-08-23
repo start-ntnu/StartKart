@@ -4,7 +4,7 @@ create table Users (
     email VARCHAR(255) NOT NULL,
     pfp VARCHAR(255) NOT NULL,
 
-    'character' VARCHAR(255),
+    avatar VARCHAR(255),
     nickname VARCHAR(255),
     elo INT DEFAULT 1000,
     wins INT DEFAULT 0,
