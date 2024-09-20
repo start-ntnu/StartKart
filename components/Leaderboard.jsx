@@ -22,24 +22,26 @@ export default function Leaderboard({rows}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.filter((row, i) => row.plays > 0).map((row, i) => (
-              <TableRow
-                key={i}
-              >
-                <TableCell component="th" scope="row">
-                  {(i+1)}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "0.5rem"}}>
-                    <Avatar src={row.avatar} />
-                    <div>
-                      {row.name}
+            {rows
+              .filter(row => row.plays > 0)
+              .map((row, i) => (
+                <TableRow
+                  key={i}
+                >
+                  <TableCell component="th" scope="row">
+                    {(i+1)}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "0.5rem"}}>
+                      <Avatar src={row.avatar} />
+                      <div>
+                        {row.name}
+                      </div>
                     </div>
-                  </div>
-                </TableCell>
-                <TableCell align="right">{Math.round(row.wins/row.plays*100)}%</TableCell>
-                <TableCell align="right">{row.elo}</TableCell>
-              </TableRow>
+                  </TableCell>
+                  <TableCell align="right">{Math.round(row.wins/row.plays*100)}%</TableCell>
+                  <TableCell align="right">{row.elo}</TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>
