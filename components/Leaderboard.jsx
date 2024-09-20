@@ -22,7 +22,7 @@ export default function Leaderboard({rows}) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
+            {rows.filter((row, i) => row.plays > 0).map((row, i) => (
               <TableRow
                 key={i}
               >
