@@ -17,29 +17,31 @@ export default function Leaderboard({rows}) {
             <TableRow>
               <TableCell>Nr</TableCell>
               <TableCell>Navn</TableCell>
-              <TableCell align="right">Antall Spill</TableCell>
+              <TableCell align="right">WR</TableCell>
               <TableCell align="right">Poeng</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row, i) => (
-              <TableRow
-                key={i}
-              >
-                <TableCell component="th" scope="row">
-                  {(i+1)}
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "0.5rem"}}>
-                    <Avatar src={row.avatar} />
-                    <div>
-                      {row.name}
+            {rows
+              .filter(row => row.plays > 0)
+              .map((row, i) => (
+                <TableRow
+                  key={i}
+                >
+                  <TableCell component="th" scope="row">
+                    {(i+1)}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <div style={{display: "flex", flexDirection: "row", alignItems: "center", gap: "0.5rem"}}>
+                      <Avatar src={row.avatar} />
+                      <div>
+                        {row.name}
+                      </div>
                     </div>
-                  </div>
-                </TableCell>
-                <TableCell align="right">{row.plays} ({row.wins}w)</TableCell>
-                <TableCell align="right">{row.elo}</TableCell>
-              </TableRow>
+                  </TableCell>
+                  <TableCell align="right">{Math.round(row.wins/row.plays*100)}%</TableCell>
+                  <TableCell align="right">{row.elo}</TableCell>
+                </TableRow>
             ))}
           </TableBody>
         </Table>
