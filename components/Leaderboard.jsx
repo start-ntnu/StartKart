@@ -17,7 +17,7 @@ export default function Leaderboard({rows}) {
             <TableRow>
               <TableCell>Nr</TableCell>
               <TableCell>Navn</TableCell>
-              <TableCell align="right">Antall Spill</TableCell>
+              <TableCell align="right">WR</TableCell>
               <TableCell align="right">Poeng</TableCell>
             </TableRow>
           </TableHead>
@@ -37,7 +37,7 @@ export default function Leaderboard({rows}) {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell align="right">{row.plays} ({row.wins}w)</TableCell>
+                <TableCell align="right">{Math.round(row.wins/row.plays*100)}%</TableCell>
                 <TableCell align="right">{row.elo}</TableCell>
               </TableRow>
             ))}
